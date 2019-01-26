@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html class="no-touch" lang="en"><head>
+		<title>TMS Software | Blog | Storing objects in the Google Firebase cloud with TMS Cloud Pack</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="shortcut icon" href="https://www.tmssoftware.com/site/favicon.ico">
+
+	<link rel="apple-touch-icon" sizes="57x57" href="https://www.tmssoftware.com/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="https://www.tmssoftware.com/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="https://www.tmssoftware.com/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="https://www.tmssoftware.com/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="https://www.tmssoftware.com/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="https://www.tmssoftware.com/apple-touch-icon-120x120.png">
+	<link rel="icon" type="image/png" href="https://www.tmssoftware.com/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="https://www.tmssoftware.com/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="https://www.tmssoftware.com/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="https://www.tmssoftware.com/manifest.json">
+	<link rel="mask-icon" href="https://www.tmssoftware.com/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="theme-color" content="#ffffff">
+
+	<meta name="description" content="Components for software development with Embarcadero Delphi, C++Builder and Microsoft Visual Studio">
+	<meta name="author" content="TMS Software">
+	<meta name="robots" content="index, follow">
+	<meta property="og:title" content="TMS Software">
+	<meta property="og:description" content="">
+	<meta property="og:url" content="">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/bootstrap.css" type="text/css">
+	<link rel="stylesheet" href="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/master.css" type="text/css">
+	<link rel="stylesheet" href="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/custom.css" type="text/css">
+
+	<link rel="alternate" type="application/rss+xml" title="TMS Software" href="https://www.tmssoftware.com/rss/tms.xml">
+
+<!--		<meta http-equiv="Content-type" content="text/html; charset=windows-1252" />-->
+<!--		<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />-->
+<!--        <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />-->
+
+<!--	<meta http-equiv="Content-Language" content="en-us" />	-->
+	<meta http-equiv="imagetoolbar" content="no">
+	<meta name="MSSmartTagsPreventParsing" content="true">
+	<meta name="Copyright" content="(c) 2008-2017 Copyright: TMS Software">
+	<meta name="Keywords" content="VCL,.NET,GRID,PLANNER,SCHEDULING,INTRAWEB,EMBARCADERO,DELPHI,C++BUILDER,VISUAL STUDIO,FREE,WEB APPLICATIONS,ASP.NET,WINDOWS CE,EXCEL,DIAGRAM,SCRIPTING,SCRIPTER,QUERY,IPHONE,IPAD,FIREMONKEY">
+	<!-- IE 9  pinned sites -->
+	<meta name="application-name" content="TMS software">
+	<meta name="msapplication-tooltip" content="TMS software: VCL,ASP.NET,.NET components for Delphi,C++Builder &amp; Visual Studio">
+
+	<meta name="msapplication-starturl" content="./">
+
+	<meta name="msapplication-task" content="name=News;
+		  action-uri=./default.asp;
+		  icon-uri=/site/ico/info.ico">
+
+	<meta name="msapplication-task" content="name=Support;
+		  action-uri=./support.asp;
+		  icon-uri=/site/ico/help_24.ico">
+
+	<meta name="msapplication-task" content="name=Blog;
+		  action-uri=./blog.asp;
+		  icon-uri=/site/ico/rss_logo.ico">
+
+	<meta name="msapplication-task" content="name=TMS on Twitter;
+		  action-uri=http://www.twitter.com/tmssoftwarenews;
+		  icon-uri=/site/ico/twitter_logo.ico">
+
+	<meta name="msapplication-task" content="name=TMS on Facebook;
+		  action-uri=http://www.facebook.com/tmssoftware;
+		  icon-uri=/site/ico/facebook_logo.ico">
+
+	<!-- End IE 9  pinned sites -->
+
+	<script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/cbgapi.loaded_1" async=""></script><script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/cbgapi.loaded_0" async=""></script><script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/jquery-1.js"></script>
+	<script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/common.js" type="text/javascript"></script>
+	<script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/tms.js" type="text/javascript"></script>
+		
+<style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style><style type="text/css">.dp-delphi .number { color: blue; }.dp-delphi .directive { color: #008284; }.dp-delphi .vars { color: #000; }</style></head>
+<body>
+
+
+	<header class="small">
+		<div class="bg-dark">
+			<nav class="navbar nav-utilities color-white">
+				<div class="container-fluid">
+			
+					<!--
+					<a href="https://www.tmssoftware.com/site/login.asp" id="btnLogin">Login</a>
+					&nbsp;<img id="maicon" src="img/arrow_down.png" style="display:none;cursor:pointer;margin-top:10px;margin-right:10px;" onclick="showMA(event, this);">
+					-->
+
+					<div class="navbar-header">
+						<p>&nbsp;</p>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="https://secure.element5.com/shareit/checkout.html?currencies=EUR,all&amp;afproducts=1&amp;stylefrom=207778&amp;languageid=1&amp;PAYMENTTYPE_ID=CCA" title="" target="_blank"><i class="glyphicon glyphicon-shopping-cart"></i>my cart</a></li>
+						<li><a href="https://www.tmssoftware.com/site/login.asp" title=""><i class="glyphicon glyphicon-user"></i>sign in</a></li>
+					</ul>
+				
+				</div>
+			</nav>
+		</div>
+		<nav class="navbar nav-main navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" style="margin-top: 22px;">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="https://www.tmssoftware.com/site/default.asp?s=home" class="navbar-brand" style="height: 62px; padding-top: 15px; padding-bottom: 15px;">
+						<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/logo_tms_software.png" class="logo-big" alt="TMS Software" width="303" height="37">
+						<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/logo_tms_software_small.png" class="logo-small" alt="TMS Software" width="71" height="32">
+					</a>
+				</div>
+				<form class="navbar-form nav-search navbar-right" role="search" action="searchindex.asp" method="post" name="search" id="search" style="transition: background 0.6s ease 0s;">
+					<fieldset>
+						<input type="text" id="KW" name="KW" placeholder="Search terms">
+						<button class="button-search" onclick="setSearch(this.form)" style="height: 62px;">Search</button>
+					</fieldset>
+				</form>
+				<div class="collapse navbar-collapse navbar-right" id="navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="#" onclick="toggleQuicklinks(event)" data-toggle="collapse" data-target=".navbar-collapse.in" style="transition: background 0.6s ease 0s; padding-top: 21px; padding-bottom: 19px;">Products</a></li>
+						<li><a href="https://www.tmssoftware.com/site/blog.asp" style="transition: background 0.6s ease 0s; padding-top: 21px; padding-bottom: 19px;">Blog</a></li>
+						<li><a href="https://www.tmssoftware.com/site/news.asp" style="transition: background 0.6s ease 0s; padding-top: 21px; padding-bottom: 19px;">News</a></li>
+						<li><a href="https://www.tmssoftware.com/site/about.asp" style="transition: background 0.6s ease 0s; padding-top: 21px; padding-bottom: 19px;">About</a></li>
+						<li><a href="https://www.tmssoftware.com/site/support.asp" style="transition: background 0.6s ease 0s; padding-top: 21px; padding-bottom: 19px;">Support</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<section class="product-header quicklinks-header is_stuck" style="padding: 0px; margin: 0px; height: 0px; z-index: 999; position: fixed; top: 0px; width: 1349px;">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-9">
+				</div>
+
+				<div class="col-sm-3 tms-quicklinks-container container-fluid">
+					<!--
+					<p><a class="btn btn-primary btn-block" href="#" title="Quicklinks" role="button">Quicklinks<i class="tms-btn-dot"></i></a></p>
+					-->
+					<div class="tms-quicklinks">
+						<div class="container-fluid">
+							<div class="row">
+								<h3><i class="glyphicon glyphicon-arrow-right"></i><a href="https://www.tmssoftware.com/site/tmsallaccess.asp">TMS ALL-ACCESS</a></h3>
+								<hr>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<span class="sublink" href="#">Grids</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/advgrid2.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> VCL Grid</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfmxpack.asp?s=fmxgrid"><i class="glyphicon glyphicon-one-fine-dot"></i> FMX Grid</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfncuipack.asp?s=fncgrid"><i class="glyphicon glyphicon-one-fine-dot"></i> FNC Grid</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsiwprose.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> IW Grid</a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<span class="sublink">Planners</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/dbplanner.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> VCL Planner</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfmxpack.asp?s=fmxplanner"><i class="glyphicon glyphicon-one-fine-dot"></i> FMX Planner</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfncuipack.asp?s=fncplanner"><i class="glyphicon glyphicon-one-fine-dot"></i> FNC Planner</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsiwplan.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> IW Planner</a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<span class="sublink">Charts</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/advchart.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> VCL Charts</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfmxchart.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> FMX Charts</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfncchart.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> FNC Charts</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsiwadvchart.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> IW Charts</a></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-4">
+									<span class="sublink">Excel Reporting</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/flexcel.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> VCL Flexcel</a></li>
+										<li><a href="https://www.tmssoftware.com/site/flexcelnet.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> .NET Flexcel</a></li>
+										<li><a href="https://www.tmssoftware.com/site/flexceldll.asp"><i class="glyphicon glyphicon-one-fine-dot"></i>  Flexcel DLL</a></li>
+									</ul>
+								</div>
+
+								<div class="col-sm-4">
+									<span class="sublink">Mapping</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/webgmaps.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> VCL Maps</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfmxwebgmaps.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> FMX Maps</a></li>
+										<li><a href="https://www.tmssoftware.com/site/iwwebgmaps.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> IW Maps</a></li>
+									</ul>
+								</div>
+								<div class="col-sm-4">
+									<span class="sublink">RichEditors</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/AdvRichEditor.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> VCL RichEditor</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfmxpack.asp?s=fmxricheditor"><i class="glyphicon glyphicon-one-fine-dot"></i> FMX RichEditor</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfncuipack.asp?s=fncricheditor"><i class="glyphicon glyphicon-one-fine-dot"></i> FNC RichEditor</a></li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="row">
+
+								<div class="col-sm-4">
+									<span class="sublink">Business Tools</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/aurelius.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> ORM (Aurelius)</a></li>
+										<li><a href="https://www.tmssoftware.com/site/xdata.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> REST/JSON</a></li>
+										<li><a href="https://www.tmssoftware.com/site/scriptstudiopro.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> Scripter</a></li>
+										<li><a href="https://www.tmssoftware.com/site/remotedb.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> Remote DB access</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsecho.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> Data replication</a></li>
+										<li><a href="https://www.tmssoftware.com/site/workflow.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> Workflow</a></li>
+									</ul>
+								</div>
+
+								<div class="col-sm-4">
+									<span class="sublink">UI Libraries</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/tmspack.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> VCL UI Pack</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfmxpack.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> FMX UI Pack</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfncuipack.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> FNC UI Pack</a></li>
+									</ul>
+
+									<span style="display:block;height:1px;overflow:hidden;"></span>
+									<span class="sublink">WEB</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/tmswebcore.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> WEB Core</a></li>
+									</ul>
+								</div>
+
+								<div class="col-sm-4">
+									<span class="sublink">Cloud service access</span>
+									<ul>
+										<li><a href="https://www.tmssoftware.com/site/cloudpack.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> VCL Cloud</a></li>
+										<li><a href="https://www.tmssoftware.com/site/tmsfmxcloudpack.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> FMX Cloud</a></li>
+										<li><a href="https://www.tmssoftware.com/site/myclouddata.asp"><i class="glyphicon glyphicon-one-fine-dot"></i> DB in the Cloud</a></li>
+									</ul>
+								</div>
+
+							</div>
+
+							<div class="row">
+								<hr>
+							</div>
+							<div class="row">
+								<h3 style="margin-top:10px;margin-bottom:0px;float:left;"><i class="glyphicon glyphicon-arrow-right"></i><a href="https://www.tmssoftware.com/site/products.asp">ALL PRODUCTS&nbsp;</a></h3>
+								<h3 style="margin-top:10px;margin-bottom:0px;float:right;"><i class="glyphicon glyphicon-arrow-right"></i><a href="https://www.tmssoftware.com/site/tags.asp">SEARCH BY TAGS</a></h3>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section><div style="position: static; width: 1349px; height: 0px; display: block; vertical-align: baseline; float: none;"></div>
+
+	<div class="headerpush"></div>
+	
+
+	<div class="breadcrumbs bg-light">
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li><a href="https://www.tmssoftware.com/site/">Home</a></li>
+				<li class="active">Blog</li>
+				
+			</ol>
+		</div>
+	</div>
+				
+<!--
+	<section class="product-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-9">
+					<h2>Blog</h2>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+-->
+
+	<div class="product-content">
+		<div class="container-fluid">
+
+			<div class="row product-title" style="padding-right:20px;padding-bottom:20px;">
+				<div class="col-md-9 col-sm-12">
+					<a id="universal" class="btn tms-btn-next" href="#" role="button" title="Show Menu" style="display: none;"><i class="glyphicon glyphicon-one-fine-dot"></i></a>
+				</div>
+			</div>
+
+			<div style="position: relative; width: 309px; height: 953px; display: block; vertical-align: baseline; float: left;"><aside class="col-md-3 col-sm-4 col-xs-12 sticky is_stuck" style="position: fixed; top: -349px; width: 310px;">
+
+				<p><a class="btn tms-btn-back btn-block" href="#" role="button"><i class="glyphicon glyphicon-arrow-left"></i>Hide menu</a></p>
+				<ul class="tms-side-menu">
+					<li class="tms-side-black">
+						<a href="https://www.tmssoftware.com/site/tmsallaccess.asp?t=all" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">ALL</div>
+							<span>TMS ALL- <br>ACCESS</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-red">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=vclp" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">VCL</div>
+							<span>VCL <br>components</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-web">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=web" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">WEB</div>
+							<span>WEB <br>components</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-yellow">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=fm" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">FMX</div>
+							<span>FMX <br>components</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-silver">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=fnc" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">FNC</div>
+							<span>FNC <br>components</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-blue-light">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=dt" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">BIZ</div>
+							<span>Business <br>tools</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-blue">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=net" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">.NET</div>
+							<span>.NET <br>components</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-green">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=iw" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">IW</div>
+							<span>IntraWeb <br>components</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-purple">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=lcl" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">LCL</div>
+							<span>LCL <br>components</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-gold">
+						<a href="https://www.tmssoftware.com/site/products.asp?t=dev" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">DEV</div>
+							<span>Developer <br>tools</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+					<li class="tms-side-pink">
+						<a href="https://www.tmssoftware.com/site/freetools.asp" class="tms-side-title" title="">
+							<div class="tms-panel-thumb">FREE</div>
+							<span>Free <br>tools</span>
+							<i class="tms-panel-border" style="transition: height 0.4s ease 0s;"></i>
+							<i class="tms-btn-dot" style="transition: bottom 0.4s ease 0s;"></i>
+						</a>
+					</li>
+
+				</ul>
+			</aside></div>
+			
+<!--
+
+				
+
+				<div class="borderTop"><h2>Stay in touch</h2></div>
+				<div class="borderContent">
+					<p class="socialMedia">
+						<a href="http://www.tmssoftware.com/site/feed" title="Subscribe to RSS Feed" target="_blank">
+							<img src="img/icon_rss.png" />
+						</a>
+					
+						<a href="http://twitter.com/TMSsoftwareNews" title="Follow TMS Software on Twitter" target="_blank">
+							<img src="img/icon_twitter.png"  />
+						</a>
+					
+						<a href="http://www.facebook.com/TMSsoftware?v=wall" title="Follow TMS Software on Facebook" target="_blank">
+							<img src="img/icon_facebook.png" />
+						</a>
+					
+						<a href="http://www.linkedin.com/groups?gid=4339358&trk=hb_side_g" title="Follow TMS Software on LinkedIn" target="_blank">
+							<img src="img/icon_linkedin.png" />
+						</a>
+
+						<a href="https://plus.google.com/115416141173053989087/posts" title="Follow TMS Software on Google+" target="_blank">
+							<img src="img/icon_google.png"  />
+						</a>
+
+						
+						<g:plusone size="small" href="http://www.tmssoftware.com/"></g:plusone>
+
+						<br />
+						
+						<a href="http://itunes.com/app/TMSSoftwareNews" target="_blank" id="iTunesButton">TMS Software on your iPhone or iPad &raquo;</a>
+					</p>
+					<p class="text">Add your e-mail address here to receive the monthly TMS Software alerts.</p>
+					<form action="regalert.asp" method="post" onSubmit="return validateAlert()">
+						<input type="text" class="text" name="ALERTEMAIL" value="" id="ALERTEMAIL" class="text" /><br />
+						<input type="radio" name="rsub" value="subscribe" id="subscription01" checked />&nbsp;<label for="subscription01">Subscribe</label>&nbsp;
+						<input type="radio" name="rsub" value="unsubscribe" id="subscription02" />&nbsp;<label for="subscription02">Unsubscribe</label><br />
+						<button type="submit">Submit</button>
+					</form>
+				</div>
+				<div class="borderBottom"></div>
+
+				
+
+	
+			</div>
+			-->
+
+
+	<main class="col-md-9 col-sm-8 col-xs-12 has-side product-">
+		<section>
+
+<style>
+	.comment
+	{
+		padding:3px;
+		padding-left:10px;
+		border-left:1px solid #DCDCDC;
+	}
+
+	.commentreply
+	{
+		margin-left:30px;
+		padding:3px;
+		padding-left:10px;
+		border-left:1px solid #DCDCDC;
+	}
+
+	img.blogtype
+	{
+		margin-left:3px;
+		margin-right:3px;
+	}
+</style>
+
+<script>
+
+function RefreshImage(valImageId) {
+	var objImage = document.images[valImageId];
+	if (objImage == undefined) {
+		return;
+	}
+	var now = new Date();
+	objImage.src = objImage.src.split('?')[0] + '?x=' + now.toUTCString();
+}
+
+function submitQ(form)
+{		
+	if (form.email)
+	{		
+		if (form.email.value != "")
+		{
+			var re = /^([a-zA-Z0-9_.+-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+			if (re.test(form.supportMAIL.value)){
+				//return true
+			}
+			else
+			{
+				alert("Please enter a valid Email Address.")
+				return false
+			}
+		}			
+
+		if (form.captchacode)
+		{	
+			if (form.captchacode.value == "") 
+			{
+				alert("Please fill in all fields.");	
+				return false;
+			}
+		}	
+
+		if ( 
+			(form.textc.value == "")
+			|| (form.authorc.value == "")
+			|| (form.email.value == "")		
+			)
+		{
+			alert("Please fill in all fields.");	
+			return false;
+		}
+	}
+	else
+	{
+		if ( 
+			(form.textc.value == "")
+			)
+		{
+			alert("Please fill in the comment field.");	
+			return false;
+		}
+	}
+}
+
+function gotopr(ctrl)
+{
+	pr = ctrl[ctrl.selectedIndex].value
+	prname = ctrl[ctrl.selectedIndex].text.replace(/&/g, "[amp]")
+	window.location = "?prcode=" + pr + "&prname=" + prname;
+}
+
+function gototype(ctrl)
+{
+	window.location = "?type=" + ctrl.value + "&show=" + ctrl.checked;
+}
+
+</script>
+
+
+
+
+    
+
+	<div style="float:right">
+	
+	<a href="https://www.tmssoftware.com/site/feed/" target="_blank"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/rss.png" style="height:37px;width:37px;" title="RSS Feed"></a>
+
+	
+		<a href="https://www.tmssoftware.com/site/blog.asp?action=options&amp;post=418"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/technical.png" style="height:37px;width:37px;" title="Show Options"></a>
+	
+
+	</div>
+	
+	
+
+	<br><br>
+	
+			<h1>Blog</h1>
+			 
+				<br>
+				
+				Previous
+				
+				&nbsp;|&nbsp;				
+				
+				<a href="https://www.tmssoftware.com/site/blog.asp?page=1">Next</a>
+				
+				&nbsp;|&nbsp;
+				<a href="https://www.tmssoftware.com/site/blog.asp?s=index">Index</a>
+				<br><br> 
+				<script>document.title = "TMS Software | Blog | Storing objects in the Google Firebase cloud with TMS Cloud Pack";</script>
+					<h1>
+					<a href="https://www.tmssoftware.com/site/blog.asp?post=418"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/spider_24.png" style="float:right;padding:0px;margin:0px;margin-right:5px;" title="Direct Link"></a>
+						<a href="https://www.tmssoftware.com/site/cloudpack.asp">
+							<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/external_link.png"> Storing objects in the Google Firebase cloud with TMS Cloud Pack
+					</a>
+
+					</h1>
+
+					<span style="float:right;margin=0;padding:0;color:black;">
+					Bookmarks:&nbsp;
+					
+	<script language="JavaScript" type="text/javascript">
+		var socialLinks = new social();
+		socialLinks.addtoMethod=1;
+		socialLinks.DrawLinks('socialLinks', 'https://www.tmssoftware.com/site/blog.asp?post=418', escape(document.title + ' | Storing objects in the Google Firebase cloud with TMS Cloud Pack'), 100, 0, 'SmallText Bold', 'AddTo');document.write('&nbsp;&nbsp;<g:plusone size=\'small\' href=\'https://www.tmssoftware.com/site/blog.asp?post=418\'></g:plusone>');
+	</script><a class="AddTo" title="Add this to Facebook" onclick="return socialLinks.addto(0, 'https://www.tmssoftware.com/site/blog.asp?post=418', 'TMS%20Software%20%7C%20Blog%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack');" href="#"><img class="bmimg" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/icon_facebook.png" border="0" align="absmiddle"></a>  <a class="AddTo" title="Add this to Twitter" onclick="return socialLinks.addto(1, 'https://www.tmssoftware.com/site/blog.asp?post=418', 'TMS%20Software%20%7C%20Blog%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack');" href="#"><img class="bmimg" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/icon_twitter.png" border="0" align="absmiddle"></a>  <a class="AddTo" title="Add this to Google Bookmarks" onclick="return socialLinks.addto(2, 'https://www.tmssoftware.com/site/blog.asp?post=418', 'TMS%20Software%20%7C%20Blog%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack');" href="#"><img class="bmimg" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/icon_google_favicon.png" border="0" align="absmiddle"></a>  &nbsp;&nbsp;<div style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 24px; height: 15px;" id="___plusone_0"><iframe ng-non-bindable="" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 24px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 15px;" tabindex="0" vspace="0" id="I0_1546409297559" name="I0_1546409297559" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/fastbutton.htm" data-gapiattached="true" title="G+" width="100%" frameborder="0"></iframe></div>
+	
+					</span>
+
+					
+					<h4>Tuesday, June 20, 2017</h4>					
+					Since the latest release of <a href="https://www.tmssoftware.com/site/cloudpack.asp">TMS Cloud Pack</a>, there is now also built-in support to use <a href="https://firebase.google.com/" target="_blank">Google Firebase</a>
+ for cloud data storage. The architecture of Google's Firebase is quite 
+simple. It offers storage of JSON data in the cloud. The JSON data has a
+ unique identifier in a table and via access with this unique 
+identifier, this JSON data can be read, updated or deleted. In addition,
+ indexing rules can be set to perform query on the data in a Firebase 
+table, for example, retrieve all JSON objects where a field X has value 
+Y.<br>
+<br>
+To make it really easy use to use data on Google Firebase from a Delphi 
+or C++Builder application, we have added capabilities to put objects or 
+generic lists of objects in a Firebase table. This is done via the 
+non-visual component TFirebaseObjectDatabase that you can put on the 
+form.<br>
+<br>
+<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/firebasecomp.png"><br><br>
+To demonstrate this, consider a class we want to use in the Delphi application that descends from TFirebaseObject:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span>TFirebaseCustomer&nbsp;=&nbsp;</span><span class="keyword">class</span><span>(TFirebaseObject)&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">private</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FName:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FStreet:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FZIP:&nbsp;<span class="keyword">integer</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FDoB:&nbsp;TDate;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;FCity:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">public</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">constructor</span><span>&nbsp;Create;&nbsp;override;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">destructor</span><span>&nbsp;Destroy;&nbsp;override;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">published</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Name:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FName&nbsp;</span><span class="keyword">write</span><span>&nbsp;FName;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Street:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FStreet&nbsp;</span><span class="keyword">write</span><span>&nbsp;FStreet;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;City:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FCity&nbsp;</span><span class="keyword">write</span><span>&nbsp;FCity;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;ZIP:&nbsp;</span><span class="keyword">integer</span><span>&nbsp;read&nbsp;FZIP&nbsp;</span><span class="keyword">write</span><span>&nbsp;FZIP;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;DoB:&nbsp;TDate&nbsp;read&nbsp;FDoB&nbsp;</span><span class="keyword">write</span><span>&nbsp;FDoB;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">  TFirebaseCustomer = class(TFirebaseObject)
+  private
+    FName: string;
+    FStreet: string;
+    FZIP: integer;
+    FDoB: TDate;
+    FCity: string;
+  public
+    constructor Create; override;
+    destructor Destroy; override;
+  published
+    property Name: string read FName write FName;
+    property Street: string read FStreet write FStreet;
+    property City: string read FCity write FCity;
+    property ZIP: integer read FZIP write FZIP;
+    property DoB: TDate read FDoB write FDoB;
+  end;
+</pre></div>
+<br>
+Now, after we have retrieved a connection for TAdvFirebaseObjectDataBase to Firebase via:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span>AdvFirebaseObjectDatabase1</span><span class="number">.</span><span>DatabaseName&nbsp;:=&nbsp;</span><span class="string">'TMS'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>AdvFirebaseObjectDatabase1<span class="number">.</span><span>TableName&nbsp;:=&nbsp;</span><span class="string">'Customers'</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>AdvFirebaseObjectDatabase1<span class="number">.</span><span>Connect;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">  AdvFirebaseObjectDatabase1.DatabaseName := 'TMS';
+  AdvFirebaseObjectDatabase1.TableName := 'Customers';
+  AdvFirebaseObjectDatabase1.Connect;
+</pre></div>
+we can create and put TFirebaseCustomer objects in the Google Firebase realtime data cloud:<br>
+<br>
+
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;cst:&nbsp;TFireBaseCustomer;&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;cst&nbsp;:=&nbsp;TFireBaseCustomer<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">try</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Name&nbsp;:=&nbsp;</span><span class="string">'Bill&nbsp;Gates'</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Street&nbsp;:=&nbsp;</span><span class="string">'Microsoft&nbsp;Av'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>ZIP&nbsp;:=&nbsp;</span><span class="number">2123</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>City&nbsp;:=&nbsp;</span><span class="string">'Redmond'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>DoB&nbsp;:=&nbsp;EncodeDate(</span><span class="number">1969</span><span>,</span><span class="number">04</span><span>,</span><span class="number">18</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>ID&nbsp;:=&nbsp;</span><span class="string">'1240'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>InsertObject(cst);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">finally</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Free;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">var
+  cst: TFireBaseCustomer;
+begin
+  cst := TFireBaseCustomer.Create;
+  try
+    cst.Name := 'Bill Gates';
+    cst.Street := 'Microsoft Av';
+    cst.ZIP := 2123;
+    cst.City := 'Redmond';
+    cst.DoB := EncodeDate(1969,04,18);
+    cst.ID := '1240';
+    AdvFirebaseObjectDatabase1.InsertObject(cst);
+  finally
+    cst.Free;
+  end;
+end;
+</pre></div>
+<br>
+All published properties of the object will be automatically persisted 
+on the Google Firebase cloud. This is how the data looks when inspecting
+ it on the <a href="https://console.firebase.google.com/" target="_blank">Firebase console</a><br>
+<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/firebaseobj0.png">
+<br>
+Note that we have explicitly set the unique ID of the object via the 
+cst.ID property. When the ID is set at application level, it is the 
+responsibility of the app to use unique IDs. When no ID is set, the 
+AdvFirebaseObjectDatabase will automatically create a GUID as ID.<br>
+<br>
+In this example, we have created a rather simple object with simple data
+ types. But nothing prevents you from using class properties as in this 
+example: <br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span>TCareerPeriod&nbsp;=&nbsp;</span><span class="keyword">class</span><span>(TPersistent)&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">private</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FFinish:&nbsp;<span class="keyword">integer</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FStart:&nbsp;<span class="keyword">integer</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">published</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Start:&nbsp;</span><span class="keyword">integer</span><span>&nbsp;read&nbsp;FStart&nbsp;</span><span class="keyword">write</span><span>&nbsp;FStart;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Finish:&nbsp;</span><span class="keyword">integer</span><span>&nbsp;read&nbsp;FFinish&nbsp;</span><span class="keyword">write</span><span>&nbsp;FFinish;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>TFirebaseCustomer&nbsp;=&nbsp;<span class="keyword">class</span><span>(TFirebaseObject)&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">private</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FName:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FStreet:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FZIP:&nbsp;<span class="keyword">integer</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FDoB:&nbsp;TDate;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;FCity:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FPicture:&nbsp;TFireBasePicture;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;FCareer:&nbsp;TCareerPeriod;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">procedure</span><span>&nbsp;SetCareer(</span><span class="keyword">const</span><span>&nbsp;Value:&nbsp;TCareerPeriod);&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">public</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">constructor</span><span>&nbsp;Create;&nbsp;override;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">destructor</span><span>&nbsp;Destroy;&nbsp;override;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">published</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Name:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FName&nbsp;</span><span class="keyword">write</span><span>&nbsp;FName;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Street:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FStreet&nbsp;</span><span class="keyword">write</span><span>&nbsp;FStreet;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;City:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FCity&nbsp;</span><span class="keyword">write</span><span>&nbsp;FCity;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;ZIP:&nbsp;</span><span class="keyword">integer</span><span>&nbsp;read&nbsp;FZIP&nbsp;</span><span class="keyword">write</span><span>&nbsp;FZIP;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;DoB:&nbsp;TDate&nbsp;read&nbsp;FDoB&nbsp;</span><span class="keyword">write</span><span>&nbsp;FDoB;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Career:&nbsp;TCareerPeriod&nbsp;read&nbsp;FCareer&nbsp;</span><span class="keyword">write</span><span>&nbsp;SetCareer;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">  TCareerPeriod = class(TPersistent)
+  private
+    FFinish: integer;
+    FStart: integer;
+  published
+    property Start: integer read FStart write FStart;
+    property Finish: integer read FFinish write FFinish;
+  end;
+
+  TFirebaseCustomer = class(TFirebaseObject)
+  private
+    FName: string;
+    FStreet: string;
+    FZIP: integer;
+    FDoB: TDate;
+    FCity: string;
+    FPicture: TFireBasePicture;
+    FCareer: TCareerPeriod;
+    procedure SetCareer(const Value: TCareerPeriod);
+  public
+    constructor Create; override;
+    destructor Destroy; override;
+  published
+    property Name: string read FName write FName;
+    property Street: string read FStreet write FStreet;
+    property City: string read FCity write FCity;
+    property ZIP: integer read FZIP write FZIP;
+    property DoB: TDate read FDoB write FDoB;
+    property Career: TCareerPeriod read FCareer write SetCareer;
+  end;
+</pre></div>
+<br>
+And now this code can be used to persist this slightly more complex object:<br>
+
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;cst:&nbsp;TFireBaseCustomer;&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;cst&nbsp;:=&nbsp;TFireBaseCustomer<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">try</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Name&nbsp;:=&nbsp;</span><span class="string">'Elon&nbsp;Musk'</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Street&nbsp;:=&nbsp;</span><span class="string">'3500&nbsp;Deer&nbsp;Creek&nbsp;Road'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>ZIP&nbsp;:=&nbsp;</span><span class="number">2123</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>City&nbsp;:=&nbsp;</span><span class="string">'Palo&nbsp;Alto'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>DoB&nbsp;:=&nbsp;EncodeDate(</span><span class="number">1975</span><span>,</span><span class="number">03</span><span>,</span><span class="number">21</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>ID&nbsp;:=&nbsp;</span><span class="string">'1241'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Career</span><span class="number">.</span><span>Start&nbsp;:=&nbsp;</span><span class="number">2011</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Career</span><span class="number">.</span><span>Finish&nbsp;:=&nbsp;</span><span class="number">2017</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>InsertObject(cst);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">finally</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Free;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">var
+  cst: TFireBaseCustomer;
+begin
+  cst := TFireBaseCustomer.Create;
+  try
+    cst.Name := 'Elon Musk';
+    cst.Street := '3500 Deer Creek Road';
+    cst.ZIP := 2123;
+    cst.City := 'Palo Alto';
+    cst.DoB := EncodeDate(1975,03,21);
+    cst.ID := '1241';
+    cst.Career.Start := 2011;
+    cst.Career.Finish := 2017;
+    AdvFirebaseObjectDatabase1.InsertObject(cst);
+  finally
+    cst.Free;
+  end;
+end;
+</pre></div>
+<br>
+As you can see, more complex classes can be easily &amp; automatically persisted in the Google Firebase cloud. <br>
+<br>
+<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/firebaseobj1.png"><br>
+With respect to types of fields, there is one caveat though, Google 
+Firebase doesn't offer out of the box support for binary blobs. Imagine 
+that we'd want to persist a Delphi object that has a TPicture property. 
+The TPicture is internally streamed in a custom way to the DFM (via the 
+DefineProperties(Filer: TFiler); override) and the JSON persister does 
+not automatically get this data. There is however an easy workaround to 
+add a published string property to a class descending from TPicture and 
+use this string to hold hex encoded binary data of the picture. The 
+DataString property getter &amp; setter methods use the StreamToHex() 
+and HexToStream() functions that are included in the unit 
+CloudCustomObjectFirebase:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span>&nbsp;&nbsp;TFireBasePicture&nbsp;=&nbsp;</span><span class="keyword">class</span><span>(TPicture)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">private</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">function</span><span>&nbsp;GetDataString:&nbsp;</span><span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">procedure</span><span>&nbsp;SetDataString(</span><span class="keyword">const</span><span>&nbsp;Value:&nbsp;</span><span class="keyword">string</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">published</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;DataString:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;GetDataString&nbsp;</span><span class="keyword">write</span><span>&nbsp;SetDataString;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="comment">{&nbsp;TFireBasePicture&nbsp;}</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span><span class="keyword">function</span><span>&nbsp;TFireBasePicture</span><span class="number">.</span><span>GetDataString:&nbsp;</span><span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;ms:&nbsp;TMemoryStream;&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;ms&nbsp;:=&nbsp;TMemoryStream<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">try</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;SaveToStream(ms);&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;:=&nbsp;StreamToHex(ms);&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">finally</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;ms<span class="number">.</span><span>Free;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">procedure</span><span>&nbsp;TFireBasePicture</span><span class="number">.</span><span>SetDataString(</span><span class="keyword">const</span><span>&nbsp;Value:&nbsp;</span><span class="keyword">string</span><span>);&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;ms:&nbsp;TMemoryStream;&nbsp;&nbsp;</span></li><li class=""><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;ms&nbsp;:=&nbsp;HexToStream(Value);&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">try</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;LoadFromStream(ms);&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">finally</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;ms<span class="number">.</span><span>Free;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">  TFireBasePicture = class(TPicture)
+  private
+    function GetDataString: string;
+    procedure SetDataString(const Value: string);
+  published
+    property DataString: string read GetDataString write SetDataString;
+  end;
+
+
+{ TFireBasePicture }
+
+function TFireBasePicture.GetDataString: string;
+var
+  ms: TMemoryStream;
+begin
+  ms := TMemoryStream.Create;
+  try
+    SaveToStream(ms);
+    Result := StreamToHex(ms);
+  finally
+    ms.Free;
+  end;
+end;
+
+procedure TFireBasePicture.SetDataString(const Value: string);
+var
+  ms: TMemoryStream;
+begin
+  ms := HexToStream(Value);
+  try
+    LoadFromStream(ms);
+  finally
+    ms.Free;
+  end;
+end;</pre></div>
+<br>
+<br>
+This way, we can extend the class to have a picture property:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span>TFireBaseCustomer&nbsp;=&nbsp;</span><span class="keyword">class</span><span>(TFirebaseObject)&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">private</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FName:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FStreet:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FZIP:&nbsp;<span class="keyword">integer</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FDoB:&nbsp;TDate;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;FCity:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FPicture:&nbsp;TFireBasePicture;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;FCareer:&nbsp;TCareerPeriod;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">procedure</span><span>&nbsp;SetPicture(</span><span class="keyword">const</span><span>&nbsp;Value:&nbsp;TFireBasePicture);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">procedure</span><span>&nbsp;SetCareer(</span><span class="keyword">const</span><span>&nbsp;Value:&nbsp;TCareerPeriod);&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">public</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">constructor</span><span>&nbsp;Create;&nbsp;override;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">destructor</span><span>&nbsp;Destroy;&nbsp;override;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">published</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Name:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FName&nbsp;</span><span class="keyword">write</span><span>&nbsp;FName;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Street:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FStreet&nbsp;</span><span class="keyword">write</span><span>&nbsp;FStreet;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;City:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FCity&nbsp;</span><span class="keyword">write</span><span>&nbsp;FCity;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;ZIP:&nbsp;</span><span class="keyword">integer</span><span>&nbsp;read&nbsp;FZIP&nbsp;</span><span class="keyword">write</span><span>&nbsp;FZIP;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;DoB:&nbsp;TDate&nbsp;read&nbsp;FDoB&nbsp;</span><span class="keyword">write</span><span>&nbsp;FDoB;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Career:&nbsp;TCareerPeriod&nbsp;read&nbsp;FCareer&nbsp;</span><span class="keyword">write</span><span>&nbsp;SetCareer;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Picture:&nbsp;TFireBasePicture&nbsp;read&nbsp;FPicture&nbsp;</span><span class="keyword">write</span><span>&nbsp;SetPicture;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">  TFireBaseCustomer = class(TFirebaseObject)
+  private
+    FName: string;
+    FStreet: string;
+    FZIP: integer;
+    FDoB: TDate;
+    FCity: string;
+    FPicture: TFireBasePicture;
+    FCareer: TCareerPeriod;
+    procedure SetPicture(const Value: TFireBasePicture);
+    procedure SetCareer(const Value: TCareerPeriod);
+  public
+    constructor Create; override;
+    destructor Destroy; override;
+  published
+    property Name: string read FName write FName;
+    property Street: string read FStreet write FStreet;
+    property City: string read FCity write FCity;
+    property ZIP: integer read FZIP write FZIP;
+    property DoB: TDate read FDoB write FDoB;
+    property Career: TCareerPeriod read FCareer write SetCareer;
+    property Picture: TFireBasePicture read FPicture write SetPicture;
+  end;
+</pre></div>
+<br>
+and persist the object with picture via:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;cst:&nbsp;TFireBaseCustomer;&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;cst&nbsp;:=&nbsp;TFireBaseCustomer<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">try</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Name&nbsp;:=&nbsp;</span><span class="string">'Tim&nbsp;Cook'</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Street&nbsp;:=&nbsp;</span><span class="string">'1&nbsp;Infinite&nbsp;Loop'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>ZIP&nbsp;:=&nbsp;</span><span class="number">2123</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>City&nbsp;:=&nbsp;</span><span class="string">'Cupertino'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>DoB&nbsp;:=&nbsp;EncodeDate(</span><span class="number">1975</span><span>,</span><span class="number">03</span><span>,</span><span class="number">21</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>ID&nbsp;:=&nbsp;</span><span class="string">'1242'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Picture</span><span class="number">.</span><span>LoadFromFile(</span><span class="string">'tim_cook.jpg'</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Career</span><span class="number">.</span><span>Start&nbsp;:=&nbsp;</span><span class="number">2006</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Career</span><span class="number">.</span><span>Finish&nbsp;:=&nbsp;</span><span class="number">2017</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>InsertObject(cst);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">finally</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;cst<span class="number">.</span><span>Free;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">var
+  cst: TFireBaseCustomer;
+begin
+  cst := TFireBaseCustomer.Create;
+  try 
+    cst.Name := 'Tim Cook';
+    cst.Street := '1 Infinite Loop';
+    cst.ZIP := 2123;
+    cst.City := 'Cupertino';
+    cst.DoB := EncodeDate(1975,03,21);
+    cst.ID := '1242';
+    cst.Picture.LoadFromFile('tim_cook.jpg');
+    cst.Career.Start := 2006;
+    cst.Career.Finish := 2017;
+
+    AdvFirebaseObjectDatabase1.InsertObject(cst);
+  finally
+    cst.Free;
+  end;
+end;
+</pre></div>
+<br>
+To retrieve the objects back that were persisted, we can use:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;fbo:&nbsp;TFirebaseObject;&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;fbo&nbsp;:=&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>ReadObject(</span><span class="string">'1240'</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;Assigned(fbo)&nbsp;</span><span class="keyword">then</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(fbo&nbsp;</span><span class="keyword">is</span><span>&nbsp;TFirebaseCustomer)&nbsp;</span><span class="keyword">then</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ShowMessage((fbo&nbsp;<span class="keyword">as</span><span>&nbsp;TFirebaseCustomer).Name+</span><span class="string">';'</span><span>+(fbo&nbsp;</span><span class="keyword">as</span><span>&nbsp;TFirebaseCustomer).City);&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;fbo<span class="number">.</span><span>Free;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">var
+  fbo: TFirebaseObject;
+begin
+  fbo := AdvFirebaseObjectDatabase1.ReadObject('1240');
+
+  if Assigned(fbo) then
+  begin
+    if (fbo is TFirebaseCustomer) then
+      ShowMessage((fbo as TFirebaseCustomer).Name+';'+(fbo as TFirebaseCustomer).City);
+    fbo.Free;
+  end;
+end;
+
+</pre></div>
+<br>
+<br>To persist a property change of the object, for example to change the career date of customer 1241 to 2018, we could write:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;fbo:&nbsp;TFirebaseObject;&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;fbo&nbsp;:=&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>ReadObject(</span><span class="string">'1241'</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;Assigned(fbo)&nbsp;</span><span class="keyword">then</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(fbo&nbsp;</span><span class="keyword">is</span><span>&nbsp;TFirebaseCustomer)&nbsp;</span><span class="keyword">then</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">begin</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((fbo&nbsp;<span class="keyword">as</span><span>&nbsp;TFirebaseCustomer).Career</span><span class="number">.</span><span>Finish&nbsp;:=&nbsp;</span><span class="number">2018</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>WriteObject(fbo);&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">var
+  fbo: TFirebaseObject;
+begin
+  fbo := AdvFirebaseObjectDatabase1.ReadObject('1241');
+
+  if Assigned(fbo) then
+  begin
+    if (fbo is TFirebaseCustomer) then
+    begin 
+      ((fbo as TFirebaseCustomer).Career.Finish := 2018;
+      AdvFirebaseObjectDatabase1.WriteObject(fbo);
+    end;
+  end;
+end;
+</pre></div>
+<br <br="">
+Working with generic lists<br>
+<br>
+<br>
+The previous samples all showed how to perform CRUD operations on single
+ objects in the Google Firebase cloud.  Our component 
+TAdvFirebaseObjectDatabase also facilitates dealing with generic lists 
+of objects. Imagine you want to persist a score table of game and have 
+following simple classes to store this:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span>TSimpleClass&nbsp;=&nbsp;</span><span class="keyword">class</span><span>(TFirebaseObject)&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">private</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;FName:&nbsp;<span class="keyword">string</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;FScore:&nbsp;<span class="keyword">integer</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">published</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Name:&nbsp;</span><span class="keyword">string</span><span>&nbsp;read&nbsp;FName&nbsp;</span><span class="keyword">write</span><span>&nbsp;FName;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">property</span><span>&nbsp;Score:&nbsp;</span><span class="keyword">integer</span><span>&nbsp;read&nbsp;FScore&nbsp;</span><span class="keyword">write</span><span>&nbsp;FScore;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>TSimpleList&nbsp;=&nbsp;TList&lt;TSimpleClass&gt;;&nbsp;&nbsp;</span></li></ol></div><pre name="code" class="delphi" style="display: none;">  TSimpleClass = class(TFirebaseObject)
+  private
+    FName: string;
+    FScore: integer;
+  published
+    property Name: string read FName write FName;
+    property Score: integer read FScore write FScore;
+  end;
+
+  TSimpleList = TList&lt;TSimpleClass&gt;;
+
+</pre></div>
+<br>
+With this class and its generic list, we can add a list of data at once in the Google Firebase cloud:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;sl:&nbsp;TFirebaseObjectList;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;sc:&nbsp;TSimpleClass;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;I:&nbsp;Integer;&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;sl&nbsp;:=&nbsp;TFirebaseObjectList<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">try</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc&nbsp;:=&nbsp;TSimpleClass<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Name&nbsp;:=&nbsp;</span><span class="string">'Bruno'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Score&nbsp;:=&nbsp;</span><span class="number">48</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>ID&nbsp;:=&nbsp;</span><span class="string">'1'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sl<span class="number">.</span><span>Add(sc);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc&nbsp;:=&nbsp;TSimpleClass<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Name&nbsp;:=&nbsp;</span><span class="string">'Nancy'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Score&nbsp;:=&nbsp;</span><span class="number">83</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>ID&nbsp;:=&nbsp;</span><span class="string">'2'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sl<span class="number">.</span><span>Add(sc);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc&nbsp;:=&nbsp;TSimpleClass<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Name&nbsp;:=&nbsp;</span><span class="string">'Pieter'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Score&nbsp;:=&nbsp;</span><span class="number">17</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>ID&nbsp;:=&nbsp;</span><span class="string">'3'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sl<span class="number">.</span><span>Add(sc);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc&nbsp;:=&nbsp;TSimpleClass<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Name&nbsp;:=&nbsp;</span><span class="string">'Bart'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Score&nbsp;:=&nbsp;</span><span class="number">299</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>ID&nbsp;:=&nbsp;</span><span class="string">'4'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sl<span class="number">.</span><span>Add(sc);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc&nbsp;:=&nbsp;TSimpleClass<span class="number">.</span><span>Create;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Name&nbsp;:=&nbsp;</span><span class="string">'Wagner'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>Score&nbsp;:=&nbsp;</span><span class="number">55</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;sc<span class="number">.</span><span>ID&nbsp;:=&nbsp;</span><span class="string">'5'</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sl<span class="number">.</span><span>Add(sc);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>TableName:=&nbsp;</span><span class="string">'List'</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>InsertList(sl);&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;I&nbsp;:=&nbsp;</span><span class="number">0</span><span>&nbsp;</span><span class="keyword">to</span><span>&nbsp;sl</span><span class="number">.</span><span>Count&nbsp;-&nbsp;</span><span class="number">1</span><span>&nbsp;</span><span class="keyword">do</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sl[I].Free;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">finally</span><span>&nbsp;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;sl<span class="number">.</span><span>Free;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class=""><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">var
+  sl: TFirebaseObjectList;
+  sc: TSimpleClass;
+  I: Integer;
+begin
+  sl := TFirebaseObjectList.Create;
+  try
+    sc := TSimpleClass.Create;
+    sc.Name := 'Bruno';
+    sc.Score := 48;
+    sc.ID := '1';
+    sl.Add(sc);
+
+    sc := TSimpleClass.Create;
+    sc.Name := 'Nancy';
+    sc.Score := 83;
+    sc.ID := '2';
+    sl.Add(sc);
+
+    sc := TSimpleClass.Create;
+    sc.Name := 'Pieter';
+    sc.Score := 17;
+    sc.ID := '3';
+    sl.Add(sc);
+
+    sc := TSimpleClass.Create;
+    sc.Name := 'Bart';
+    sc.Score := 299;
+    sc.ID := '4';
+    sl.Add(sc);
+
+    sc := TSimpleClass.Create;
+    sc.Name := 'Wagner';
+    sc.Score := 55;
+    sc.ID := '5';
+    sl.Add(sc);
+
+    AdvFirebaseObjectDatabase1.TableName:= 'List';
+    AdvFirebaseObjectDatabase1.InsertList(sl);
+
+    for I := 0 to sl.Count - 1 do
+      sl[I].Free;
+  finally 
+    sl.Free;
+  end;
+end;
+</pre></div>
+<br>
+Inspecting this on the Google Firebase console results in:<br>
+<br>
+<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/firebaseobj2.png">
+<br>
+<br>
+If at a later time we'd like to retrieve the score of Bart, we could use the code:<br>
+<br>
+<div id="code-content"><div class="dp-highlighter nogutter"><div class="bar"><div class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain text</a></div></div><ol start="0" class="dp-delphi"><li class="alt"><span><span class="keyword">var</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;c:&nbsp;TFirebaseObjectList;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;I:&nbsp;Integer;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>TableName&nbsp;:=&nbsp;</span><span class="string">'List'</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;c:=&nbsp;AdvFirebaseObjectDatabase1<span class="number">.</span><span>QueryList(</span><span class="string">'Name'</span><span>,&nbsp;</span><span class="string">'Bart'</span><span>);&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;Assigned(c)&nbsp;</span><span class="keyword">then</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>&nbsp;I&nbsp;:=&nbsp;</span><span class="number">0</span><span>&nbsp;</span><span class="keyword">to</span><span>&nbsp;c</span><span class="number">.</span><span>Count&nbsp;-&nbsp;</span><span class="number">1</span><span>&nbsp;</span><span class="keyword">do</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">begin</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ShowMessage((c[I]&nbsp;<span class="keyword">as</span><span>&nbsp;TSimpleClass).Score</span><span class="number">.</span><span>ToString);&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c[I].Free;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;c<span class="number">.</span><span>Free;&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="keyword">end</span><span>;&nbsp;&nbsp;</span></span></li></ol></div><pre name="code" class="delphi" style="display: none;">var
+  c: TFirebaseObjectList;
+  I: Integer;
+
+begin
+  AdvFirebaseObjectDatabase1.TableName := 'List';
+  c:= AdvFirebaseObjectDatabase1.QueryList('Name', 'Bart');
+  if Assigned(c) then
+  begin
+    for I := 0 to c.Count - 1 do
+    begin
+      ShowMessage((c[I] as TSimpleClass).Score.ToString);
+      c[I].Free;
+    end;
+    c.Free;
+  end;
+end;</pre></div>
+<br>
+This performs a query on the List table for value 'Bart' set in the 
+'Name' field. The result of the query is a generic list (in case 
+multiple matching results are found).<br>
+<br>
+This was a glimpse at the TAdvFirebaseObjectDataBase  component as an 
+introduction for the new Google Firebase access features in the <a href="https://www.tmssoftware.com/site/cloudpack.asp">TMS Cloud Pack</a>. Explore the full set of powerful capabilities of TAdvFirebaseObjectDataBase and the many other components in <a href="https://www.tmssoftware.com/site/cloudpack.asp">TMS Cloud Pack</a> to make consuming cloud services in Delphi &amp; C++Builder a piece of cake.<br>
+
+
+
+
+
+
+
+
+
+<br>
+				
+					<br>
+
+					
+					<p class="quote">
+					Bruno Fierens
+					</p>		
+					<br>
+
+					<span style="float:right;margin=0;padding:0;color:black;">
+					Bookmarks:&nbsp;
+					
+	<script language="JavaScript" type="text/javascript">
+		var socialLinks = new social();
+		socialLinks.addtoMethod=1;
+		socialLinks.DrawLinks('socialLinks', 'https://www.tmssoftware.com/site/blog.asp?post=418', escape(document.title + ' | Storing objects in the Google Firebase cloud with TMS Cloud Pack'), 100, 0, 'SmallText Bold', 'AddTo');document.write('&nbsp;&nbsp;<g:plusone size=\'small\' href=\'https://www.tmssoftware.com/site/blog.asp?post=418\'></g:plusone>');
+	</script><a class="AddTo" title="Add this to Facebook" onclick="return socialLinks.addto(0, 'https://www.tmssoftware.com/site/blog.asp?post=418', 'TMS%20Software%20%7C%20Blog%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack');" href="#"><img class="bmimg" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/icon_facebook.png" border="0" align="absmiddle"></a>  <a class="AddTo" title="Add this to Twitter" onclick="return socialLinks.addto(1, 'https://www.tmssoftware.com/site/blog.asp?post=418', 'TMS%20Software%20%7C%20Blog%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack');" href="#"><img class="bmimg" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/icon_twitter.png" border="0" align="absmiddle"></a>  <a class="AddTo" title="Add this to Google Bookmarks" onclick="return socialLinks.addto(2, 'https://www.tmssoftware.com/site/blog.asp?post=418', 'TMS%20Software%20%7C%20Blog%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack%20%7C%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack');" href="#"><img class="bmimg" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/icon_google_favicon.png" border="0" align="absmiddle"></a>  &nbsp;&nbsp;<div style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 24px; height: 15px;" id="___plusone_1"><iframe ng-non-bindable="" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 24px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 15px;" tabindex="0" vspace="0" id="I1_1546409297569" name="I1_1546409297569" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/fastbutton_002.htm" data-gapiattached="true" title="G+" width="100%" frameborder="0"></iframe></div>
+	
+					</span>
+					
+					<br><br>
+					
+						<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/handwrite_message_24.png" style="padding:0px;margin:0px;margin-right:5px;">
+										
+							<h4 id="vc">This blog post has received 7 comments.</h4><br>
+										<div class="comment">
+									
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/handwrite_message_24.png" style="padding:0px;margin:0px;margin-right:5px;">
+										<strong>1. Tuesday, June 20, 2017 at 4:57:49 PM</strong>
+										<p class="clear"></p>
+										One of Firebase''s key strength is real time syncing of data. Is that supported ?<br>
+Thanks.
+										<!--One of Firebase''s key strength is real time syncing of data. Is that supported ?<br>
+Thanks.-->
+										<br><br>
+										<p class="quote">
+										J.
+										<!--J.-->
+										</p>
+									</div>
+									<br>	
+								
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/6.png">
+										<div class="commentreply">
+									
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/handwrite_message_24.png" style="padding:0px;margin:0px;margin-right:5px;">
+										<strong>2. Tuesday, June 20, 2017 at 5:07:48 PM</strong>
+										<p class="clear"></p>
+										At this moment we have focused on CRUD operation on objects. 
+The notification part isn''t via standard HTTP REST and at this moment 
+not yet in the TMS Cloud Pack. 
+										<!--At this moment we have focused on CRUD operation on objects. The notification part isn''t via standard HTTP REST and at this moment not yet in the TMS Cloud Pack. -->
+										<br><br>
+										<p class="quote">
+										Bruno Fierens
+										<!--Bruno Fierens-->
+										</p>
+									</div>
+									<br>	
+								
+										<div class="comment">
+									
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/handwrite_message_24.png" style="padding:0px;margin:0px;margin-right:5px;">
+										<strong>3. Tuesday, June 20, 2017 at 10:43:43 PM</strong>
+										<p class="clear"></p>
+										Is possible use this for work with Firebase Analytics. now that Google analytics is no avaliable for analyticd Apps?
+										<!--Is possible use this for work with Firebase Analytics. now that Google analytics is no avaliable for analyticd Apps?-->
+										<br><br>
+										<p class="quote">
+										Xavi Pallicera
+										<!--Xavi Pallicera-->
+										</p>
+									</div>
+									<br>	
+								
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/6.png">
+										<div class="commentreply">
+									
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/handwrite_message_24.png" style="padding:0px;margin:0px;margin-right:5px;">
+										<strong>4. Wednesday, June 21, 2017 at 11:50:59 AM</strong>
+										<p class="clear"></p>
+										Separate from our Google Firebase data access you can use 
+analytics. In our component(s) itself, there is at this moment no 
+integration with Firebase analytics, only Google analytics itself.
+										<!--Separate from our Google Firebase data access you can use analytics. In our component(s) itself, there is at this moment no integration with Firebase analytics, only Google analytics itself.-->
+										<br><br>
+										<p class="quote">
+										Bruno Fierens
+										<!--Bruno Fierens-->
+										</p>
+									</div>
+									<br>	
+								
+										<div class="comment">
+									
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/handwrite_message_24.png" style="padding:0px;margin:0px;margin-right:5px;">
+										<strong>5. Wednesday, June 21, 2017 at 12:59:38 PM</strong>
+										<p class="clear"></p>
+										Excellent News..Thank you...Awaiting updates on this providing access to full capability of firebase from Delphi.
+										<!--Excellent News..Thank you...Awaiting updates on this providing access to full capability of firebase from Delphi.-->
+										<br><br>
+										<p class="quote">
+										Saajid
+										<!--Saajid-->
+										</p>
+									</div>
+									<br>	
+								
+										<div class="comment">
+									
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/handwrite_message_24.png" style="padding:0px;margin:0px;margin-right:5px;">
+										<strong>6. Saturday, July 15, 2017 at 8:06:00 AM</strong>
+										<p class="clear"></p>
+										I take it you can store components in the cloud? For example, primitive compound shapes?
+										<!--I take it you can store components in the cloud? For example, primitive compound shapes?-->
+										<br><br>
+										<p class="quote">
+										Derek Seymour
+										<!--Derek Seymour-->
+										</p>
+									</div>
+									<br>	
+								
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/6.png">
+										<div class="commentreply">
+									
+										<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/handwrite_message_24.png" style="padding:0px;margin:0px;margin-right:5px;">
+										<strong>7. Sunday, July 16, 2017 at 5:03:07 PM</strong>
+										<p class="clear"></p>
+										You could indeed persist components, it can be streamed as object to Firebase.
+										<!--You could indeed persist components, it can be streamed as object to Firebase.-->
+										<br><br>
+										<p class="quote">
+										Bruno Fierens
+										<!--Bruno Fierens-->
+										</p>
+									</div>
+									<br>	
+								
+							<br><br>
+							
+									<form method="post" action="blog.asp" onsubmit="return submitQ(this)">
+									<table class="form">
+									<tbody><tr><td colspan="2">
+										<strong id="c">Add a new comment:</strong>
+									</td></tr>
+									<tr><td>
+										Author: 
+									</td><td>
+										<input type="text" name="authorc" maxlength="50">
+									</td></tr>
+									<tr><td>
+										Email: 
+									</td><td>
+										<input type="text" name="email" maxlength="255">
+									</td></tr>
+									<tr><td>&nbsp;</td>
+									<td>
+									You will receive a confirmation mail with a link to validate your comment, so please use a valid email address.</td></tr>
+									<tr><td valign="top">
+										Comment:
+									</td><td>
+										<textarea name="textc" style="width:350px;height:200px;"></textarea>
+									</td></tr>
+						
+									<tr>
+										<td>&nbsp;</td>
+										<td><img id="imgCaptcha" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/captcha.dib"><br><a href="javascript:void(0)" onclick="RefreshImage('imgCaptcha')">Change Image</a></td>
+										<td>
+									</td></tr>
+									<tr>
+
+									<td>
+											Fill in the characters from the image above:
+										</td>
+										<td>
+										  <input name="captchacode" type="text" id="captchacode" size="10">
+										  </td>
+									</tr>
+
+
+									<tr>
+									<td>&nbsp;</td>
+									<td>
+									<br><br>
+										<span class="highlight">All fields are required.</span>
+									</td></tr>
+
+									<tr><td>
+										&nbsp;
+									</td><td>
+										
+										<input type="submit" value="Submit comment">
+										<input type="hidden" name="action" value="submitcm">
+										<input type="hidden" name="post" value="418">
+									</td></tr>
+									</tbody></table>
+									</form>
+									
+
+					<h3 class="line"></h3>
+					<br><br>
+
+			 
+				<br>
+				
+				Previous
+				
+				&nbsp;|&nbsp;				
+				
+				<a href="https://www.tmssoftware.com/site/blog.asp?page=1">Next</a>
+				
+				&nbsp;|&nbsp;
+				<a href="https://www.tmssoftware.com/site/blog.asp?s=index">Index</a>
+				<br><br> 
+				
+
+
+				</section>
+			</main>
+		</div>
+	</div>
+
+	<footer class="bg-light">
+		<section class="sitemap container-fluid">
+			<div class="row">
+				<div class="col-md-3 col-sm-6">
+					<a href="" class="logo">
+						<img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/logo_tms_software.png" alt="TMS Software" width="187" height="23">
+					</a>
+					<p>Roeselarestraat 180 <br>8560 Wevelgem - Belgium</p>
+					<p>For sales questions <br><a href="mailto:sales@tmssoftware.com" title="Mail us">sales@tmssoftware.com</a></p>
+					<p>Copyright © 1995 - 2019 TMS Software v5.0</p><br>
+				</div>
+				<div class="col-md-2 col-sm-6">
+					<span class="sitemap-title">TMS Software</span>
+					<ul class="list">
+						<li><a href="https://www.tmssoftware.com/site/blog.asp">Blog</a></li>
+						<li><a href="https://www.tmssoftware.com/site/news.asp">News</a></li>
+						<li><a href="https://www.tmssoftware.com/site/about.asp">About</a></li>
+						<li><a href="https://www.tmssoftware.com/site/support.asp">Support</a></li>
+						<li><a href="https://www.tmssoftware.com/site/consulting.asp">Consulting</a></li>
+						<li><a href="https://www.tmssoftware.com/site/sitemap.asp">Sitemap</a></li>
+						<li><a href="https://www.tmssoftware.com/site/privacy.asp">Privacy</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<span class="sitemap-title">Products</span>
+					<ul class="list">
+						<li><a href="https://www.tmssoftware.com/site/pricelist.asp">Pricelist</a></li>
+						<li><a href="https://www.tmssoftware.com/site/orders.asp">Online Orders</a></li>
+						<li><a href="https://www.tmssoftware.com/site/licensing.asp">Licensing</a></li>
+						<li><a href="https://www.tmssoftware.com/site/manuals.asp">Manuals</a></li>
+						<li><a href="https://www.tmssoftware.com/site/support_faq.asp">FAQ</a></li>
+						<li><a href="https://www.tmssoftware.com/site/forum.asp">Forum</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<span class="sitemap-title">Stay in touch</span>
+					<p>Add your e-mail address here to receive<br>the monthly TMS Software alerts.</p>
+
+					<!--
+					<form action="regalert.asp" method="post" onSubmit="return validateAlert()">
+						<input type="text" class="text" name="ALERTEMAIL" value="" id="ALERTEMAIL" class="text" /><br />
+						<input type="radio" name="rsub" value="subscribe" id="subscription01" checked />&nbsp;<label for="subscription01">Subscribe</label>&nbsp;
+						<input type="radio" name="rsub" value="unsubscribe" id="subscription02" />&nbsp;<label for="subscription02">Unsubscribe</label><br />
+						<button type="submit">Submit</button>
+					</form>
+					-->
+
+					<form action="regalert.asp" method="post" onsubmit="return validateAlert()">
+						<fieldset>
+							<input type="email" name="ALERTEMAIL" id="ALERTEMAIL" placeholder="Your e-mail address">
+							<input type="hidden" name="rsub" value="subscribe" id="subscription1">
+							<button class="btn btn-primary button-send">Send<i class="tms-btn-dot tms-btn-dot-light-bg" style="transition: bottom 0.2s ease 0s;"></i></button>
+						</fieldset>
+					</form>
+					<ul class="nav navbar-nav">
+						<li><a href="https://www.tmssoftware.com/site/feed" title="RSS Feed" target="_blank"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/rss.png" alt="RSS" width="37" height="37"></a></li>
+						<li><a href="http://twitter.com/TMSsoftwareNews" title="Twitter" target="_blank"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/twitter.png" alt="Twitter" width="37" height="37"></a></li>
+						<li><a href="http://www.facebook.com/TMSsoftware?v=wall" title="Facebook" target="_blank"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/facebook.png" alt="Facebook" width="37" height="37"></a></li>
+						<li><a href="http://www.linkedin.com/groups?gid=4339358&amp;trk=hb_side_g" title="LinkedIn" target="_blank"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/linkedin.png" alt="LinkedIn" width="37" height="37"></a></li>
+
+						<li><a href="https://www.youtube.com/user/tmssoftwareTV" target="_blank"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/youtube.png" alt="YouTube" width="37" height="37"></a></li>
+
+						<li><a href="https://plus.google.com/115416141173053989087/posts" title="Google+" target="_blank"><img src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/googleplus.png" alt="Google+" width="37" height="37"></a></li>
+
+					</ul>
+				</div>
+			</div>
+		</section>
+	</footer>
+
+	<!--[if !IE]>-->
+	<script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/vendor-min.js"></script>
+	<!--<![endif]-->
+	<!--[if IE]>
+	<script src="js/vendor-ie-min.js"></script>
+	<![endif]-->
+	<script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/jquery.js"></script>
+	<script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/bootstrap.js"></script>
+	<script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/master.js"></script>
+
+
+
+<script type="text/javascript" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/plusone.js" gapi_processed="true"></script>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/ga.js" type="text/javascript"></script><iframe name="oauth2relay627749300" id="oauth2relay627749300" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/postmessageRelay.htm" style="width: 1px; height: 1px; position: absolute; top: -100px;" tabindex="-1" aria-hidden="true"></iframe>
+<script type="text/javascript">
+try{
+var pageTracker = _gat._getTracker("UA-112113-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+
+
+
+
+	<script type="text/javascript" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/jquery_002.js"></script>
+	<script type="text/javascript" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/jquery_003.js"></script>
+	<link rel="stylesheet" type="text/css" href="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/jquery.css" media="screen">
+
+		<script type="text/javascript"> 
+
+//		$(document).ready(function() { 
+
+//		alert($("a.zoom").fancybox());
+
+			/* Using custom settings */ 
+			$("a.zoom").fancybox({
+			'transitionIn'	: 'elastic',
+			'transitionOut'	: 'elastic', 
+			'zoomSpeedIn': 300, 
+			'zoomSpeedOut': 300, 
+			'overlayShow': false,
+			'hideOnContentClick': true,
+			'hideOnOverlayClick': true,
+			'padding': 0,
+			'margin': 0,
+			'cyclic': true
+			}); 			
+		
+//		});
+
+		</script>
+
+
+<style type="text/css"> 
+
+#fancybox-close { 
+ left: auto;
+ right: -55px; 
+} 
+
+#fancybox-left-ico { 
+ left: -15px; 
+} 
+
+#fancybox-right-ico { 
+ right: -55px; 
+ left: auto; 
+} 
+
+#fancybox-left:hover span {
+	left: 0px;
+}
+
+#fancybox-right:hover span {
+	left: auto;
+	right: -55px;
+}
+
+</style> 
+	<link type="text/css" rel="stylesheet" href="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/SyntaxHighlighter.css">
+	<script language="javascript" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/shCore.js"></script>
+	<script language="javascript" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/shBrushCSharp.js"></script>
+	<script language="javascript" src="TMS%20Software%20%20%20Blog%20%20%20Storing%20objects%20in%20the%20Google%20Firebase%20cloud%20with%20TMS%20Cloud%20Pack_files/shBrushDelphi.js"></script>
+	<script language="javascript">
+	//dp.SyntaxHighlighter.ClipboardSwf = 'js/clipboard.swf';
+	// function dp.SyntaxHighlighter.HighlightAll(name, [showGutter], [showControls], [collapseAll], [firstLine], [showColumns])
+	dp.SyntaxHighlighter.HighlightAll('code', false, true, false, 0, false);
+	</script><div id="fancybox-tmp"></div><div id="fancybox-loading" class="fancybox-ie"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap" class="fancybox-ie"><div id="fancybox-outer"><div class="fancy-bg" id="fancy-bg-n"></div><div class="fancy-bg" id="fancy-bg-ne"></div><div class="fancy-bg" id="fancy-bg-e"></div><div class="fancy-bg" id="fancy-bg-se"></div><div class="fancy-bg" id="fancy-bg-s"></div><div class="fancy-bg" id="fancy-bg-sw"></div><div class="fancy-bg" id="fancy-bg-w"></div><div class="fancy-bg" id="fancy-bg-nw"></div><div id="fancybox-inner"></div><a id="fancybox-close"></a><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div></body></html>

@@ -1,0 +1,65 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 346
+  ClientWidth = 494
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Button1: TButton
+    Left = 24
+    Top = 16
+    Width = 75
+    Height = 25
+    Caption = 'Conectare'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 24
+    Top = 47
+    Width = 75
+    Height = 25
+    Caption = 'Btn'
+    TabOrder = 1
+    OnClick = Button2Click
+  end
+  object ListBox1: TListBox
+    Left = 152
+    Top = 16
+    Width = 233
+    Height = 322
+    ItemHeight = 13
+    TabOrder = 2
+  end
+  object AdvFirebaseObjectDatabase1: TAdvFirebaseObjectDatabase
+    Agent = 'Mozilla/5.001 (windows; U; NT4.0; en-US; rv:1.0) Gecko/25250101'
+    App.CallBackURL = 'http://127.0.0.1:8888/'
+    App.CallBackPort = 8888
+    App.Name = 'beemonitor-1ffa9'
+    App.Key = 
+      '1069439317883-hq7sb1t7csq2di8916kvevmql83cmrom.apps.googleuserco' +
+      'ntent.com'
+    App.Secret = 'Q0ipAHDdEW2wvWxaYp8wQd5w'
+    PersistTokens.Location = plIniFile
+    Scopes.Strings = (
+      'https://www.googleapis.com/auth/userinfo.profile'
+      'https://www.googleapis.com/auth/userinfo.email'
+      'https://www.googleapis.com/auth/gmail.send'
+      'https://www.googleapis.com/auth/userinfo.email'
+      'https://www.googleapis.com/auth/firebase.database')
+    AuthFormSettings.Caption = 'Authorize'
+    AuthFormSettings.Width = 900
+    AuthFormSettings.Height = 600
+    ExternalBrowser = False
+    Left = 456
+    Top = 16
+  end
+end
