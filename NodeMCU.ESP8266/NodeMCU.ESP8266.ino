@@ -12,10 +12,10 @@
 #include "SparkFun_Si7021_Breakout_Library.h"
 #include <Wire.h>
 #include <Arduino.h>
-#define FIREBASE_HOST "beemonitor-1ffa9.firebaseio.com"                //Adresa firebase
-#define FIREBASE_AUTH "7wVIzlb9jxPqxi0gcZSKI5K2YM4G4Og9QyVpWRNh"       //Autentificare
-#define WIFI_SSID "R2B"                                                //Nume SSID
-#define WIFI_PASSWORD "virusbest"                                      //Parola SSID
+#define FIREBASE_HOST ""                //Adresa firebase
+#define FIREBASE_AUTH ""       //Autentificare
+#define WIFI_SSID ""                                                //Nume SSID
+#define WIFI_PASSWORD ""                                      //Parola SSID
 #define si7021Addr 0x40
 #include <HX711_ADC.h>
 #include <EEPROM.h>
